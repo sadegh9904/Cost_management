@@ -40,6 +40,7 @@
             lblAmount = new Label();
             lblCategory = new Label();
             lblDescription = new Label();
+            btnfinal = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvExpenses).BeginInit();
             SuspendLayout();
             // 
@@ -146,11 +147,22 @@
             lblDescription.TabIndex = 12;
             lblDescription.Text = "Description :";
             // 
+            // btnfinal
+            // 
+            btnfinal.Location = new Point(580, 350);
+            btnfinal.Name = "btnfinal";
+            btnfinal.Size = new Size(94, 29);
+            btnfinal.TabIndex = 13;
+            btnfinal.Text = "Save";
+            btnfinal.UseVisualStyleBackColor = true;
+            btnfinal.Click += btnfinal_Click;
+            // 
             // FormExpenseInput
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnfinal);
             Controls.Add(lblDescription);
             Controls.Add(lblCategory);
             Controls.Add(lblAmount);
@@ -184,5 +196,6 @@
         private Label lblAmount;
         private Label lblCategory;
         private Label lblDescription;
+        private Button btnfinal;
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace Cost_management
 {
@@ -28,5 +30,25 @@ namespace Cost_management
 
         public void Clear() => _expenses.Clear();
         public List<Expense> GetExpenses() => _expenses;
+
+        //for saving anythings in the prijects we use newsoft.json
+        public void SaveToFile(string path)
+        {
+            var json = JsonConvert.SerializeObject(_expenses, Formatting.Indented);
+            File.WriteAllText(path, json);
+        }
+
+        //for loading from database(newsoft.json)
+        public void LoadFromFile(string path)
+        {
+            if (File.Exists(path))
+            {
+                var json = File.ReadAllText(path);
+                var loadedExpenses = JsonConvert.DeserializeObject<List<Expense>>(json);
+
+                _expenses.Clear();
+                _expenses.AddRange(loadedExpenses);
+            }
+        }
     }
 }

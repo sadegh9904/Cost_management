@@ -13,12 +13,14 @@ namespace Cost_management
     public partial class FormExpenseInput : Form
     {
         private int count;
+        private int added_counter = 0;
         private ExpenseManager manager = new ExpenseManager();
-        private BindingList<Expense> expenseBindingList;
+        private BindingList<Expense> expenseBindingList = new BindingList<Expense>();
         public FormExpenseInput(int count)
         {
             this.count = count;
             InitializeComponent();
+            btnfinal.Enabled = false;
         }
 
         private void FormExpenseInput_Load(object sender, EventArgs e)
@@ -106,6 +108,16 @@ namespace Cost_management
             expenseBindingList.ResetBindings();
             UpdateTotal();
 
+            added_counter++;
+
+            //this is for showing the buuten for save 
+            if (added_counter >= count)
+            {
+                btnfinal.Enabled = true;
+                MessageBox.Show("All the Products are entered, now you can click on save","WellDone!",
+                    MessageBoxButtons.OK,MessageBoxIcon.Information);
+            }
+
 
             txtProductName.Clear();
             txtAmount.Clear();
@@ -119,6 +131,26 @@ namespace Cost_management
             manager.Clear();
             expenseBindingList.Clear();
             UpdateTotal();
+        }
+
+        private void btnfinal_Click(object sender, EventArgs e)
+        {
+            if (added_counter < count)
+            {
+                MessageBox.Show($"Please enter all {count} products before saving!",
+                    "Incomplete Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string path = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                "expenses.json");
+
+            manager.SaveToFile(path);
+
+            MessageBox.Show("All the informations saved now!",
+                "Information saved",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            this.Close();
         }
     }
 }
