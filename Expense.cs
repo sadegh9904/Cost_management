@@ -10,22 +10,23 @@ namespace Cost_management
     {
         public string ProductName { get; set; }
         public decimal Amount { get; set; }
+        public string Category { get; set; }
         public string Description { get; set; }
-        //public DateTime Date { get; set; }
+        public DateTime Date { get; private set; } = DateTime.Now;
 
 
-        public Expense(string productname, decimal amount, string description, DateTime date)
+        public Expense(string productname, decimal amount, string category,string description)
         {
             ProductName = productname;
             Amount = amount;
+            Category = category;
             Description = description;
-            //Date = date;
         }
 
 
         public override string ToString()
         {
-            return $"Product name :{ProductName}| Cost : {Amount}| Description : {Description}";
+            return $"Product name :{ProductName}| Cost : {Amount}| Description : {Description} | Time : {Date.ToString("yyyy-MM-dd")}";
         }
     }
 }
