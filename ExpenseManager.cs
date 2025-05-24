@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
+using Cost_management;
+using System.Text.Json;
 
 namespace Cost_management
 {
-    class ExpenseManager
+    public class ExpenseManager
     {
         private readonly List<Expense> _expenses = new List<Expense>();
         public void AddExpense(string productname, decimal amount, string category, string description)
@@ -34,8 +36,16 @@ namespace Cost_management
         //for saving anythings in the prijects we use newsoft.json
         public void SaveToFile(string path)
         {
-            var json = JsonConvert.SerializeObject(_expenses, Formatting.Indented);
-            File.WriteAllText(path, json);
+            try
+            {
+                var json = JsonConvert.SerializeObject(_expenses, Formatting.Indented);
+                File.WriteAllText(path, json);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error while saving data:\n{ex.Message}",
+                    "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         //for loading from database(newsoft.json)
@@ -47,8 +57,35 @@ namespace Cost_management
                 var loadedExpenses = JsonConvert.DeserializeObject<List<Expense>>(json);
 
                 _expenses.Clear();
-                _expenses.AddRange(loadedExpenses);
+                if (loadedExpenses != null)
+                {
+                    _expenses.AddRange(loadedExpenses);
+                }
             }
+        }
+
+        //Lambada Expression
+        public Dictionary<int,List<Expense>> GetYearlyReport()
+        {
+            return _expenses.GroupBy(e => e.Date.Year)
+                                    .ToDictionary(g => g.Key, g => g.ToList());
+        }
+
+        public Dictionary<int , List<Expense>> GetMonthlyReport(int year)
+        {
+            return _expenses.Where(e => e.Date.Year == year)
+                                    .GroupBy(e => e.Date.Month)
+                                    .ToDictionary(g => g.Key, g => g.ToList());
+        }
+
+        public List<Expense> GetExpensesByYear(int year)
+        {
+            return _expenses.Where(e => e.Date.Year == year).ToList();
+        }
+
+        public List<Expense> GetExpensesByMonth(int year, int month)
+        {
+            return _expenses.Where(e => e.Date.Year == year && e.Date.Month == month).ToList();
         }
     }
 }

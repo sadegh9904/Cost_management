@@ -20,3 +20,4 @@ C:\Users\Laptopkaran\source\repos\Cost_management\Cost_management\obj\Debug\net8
 C:\Users\Laptopkaran\source\repos\Cost_management\Cost_management\obj\Debug\net8.0-windows\Cost_management.pdb
 C:\Users\Laptopkaran\source\repos\Cost_management\Cost_management\obj\Debug\net8.0-windows\Cost_management.genruntimeconfig.cache
 C:\Users\Laptopkaran\source\repos\Cost_management\Cost_management\obj\Debug\net8.0-windows\ref\Cost_management.dll
+C:\Users\Laptopkaran\source\repos\Cost_management\Cost_management\obj\Debug\net8.0-windows\Cost_management.FormReport.resources

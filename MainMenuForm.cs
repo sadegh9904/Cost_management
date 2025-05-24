@@ -12,6 +12,7 @@ namespace Cost_management
 {
     public partial class MainMenuForm : Form
     {
+        private readonly ExpenseManager _manager = new ExpenseManager();
         public MainMenuForm()
         {
             InitializeComponent();
@@ -34,13 +35,13 @@ namespace Cost_management
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 "expenses.json");
 
-            if (File.Exists(path) || new FileInfo(path).Length == 0)
+            if (!File.Exists(path) || new FileInfo(path).Length == 0)
             {
                 MessageBox.Show("Products not added yet!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            FormReport formReport = new FormReport();
+            FormReport formReport = new FormReport(_manager);
             formReport.ShowDialog();
         }
     }

@@ -28,12 +28,41 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "FormReport";
+            comboBoxYears = new ComboBox();
+            treeViewReports = new TreeView();
+            SuspendLayout();
+            // 
+            // comboBoxYears
+            // 
+            comboBoxYears.FormattingEnabled = true;
+            comboBoxYears.Location = new Point(28, 12);
+            comboBoxYears.Name = "comboBoxYears";
+            comboBoxYears.Size = new Size(151, 28);
+            comboBoxYears.TabIndex = 0;
+            comboBoxYears.SelectedIndexChanged += comboBoxYears_SelectedIndexChanged;
+            // 
+            // treeViewReports
+            // 
+            treeViewReports.Location = new Point(28, 69);
+            treeViewReports.Name = "treeViewReports";
+            treeViewReports.Size = new Size(151, 121);
+            treeViewReports.TabIndex = 1;
+            // 
+            // FormReport
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(treeViewReports);
+            Controls.Add(comboBoxYears);
+            Name = "FormReport";
+            Text = "FormReport";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private ComboBox comboBoxYears;
+        private TreeView treeViewReports;
     }
 }

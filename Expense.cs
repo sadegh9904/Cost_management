@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cost_management
 {
-    class Expense
+    public class Expense
     {
         public string ProductName { get; set; }
         public decimal Amount { get; set; }
